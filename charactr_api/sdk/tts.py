@@ -1,8 +1,9 @@
 import json
 import requests
-from config import API_URL
-from data_objects import Credentials, Voice, Audio, map_voice
-from typing import List
+from typing import Dict, List
+
+from .config import API_URL
+from .data_objects import Credentials, Voice, map_voice
 
 
 class TTS:
@@ -23,7 +24,7 @@ class TTS:
             raise Exception(e)
         return list(map(map_voice, voices))
 
-    def convert(self, voice_id: int, text: str) -> Audio:
+    def convert(self, voice_id: int, text: str) -> Dict:
         """Convert text to speech with the voice of your choice."""
         headers = {
             "X-Client-Key": self.credentials["client_key"],

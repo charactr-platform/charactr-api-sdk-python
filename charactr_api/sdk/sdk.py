@@ -1,6 +1,6 @@
-from tts import TTS
-from vc import VC
-from data_objects import Credentials
+from .data_objects import Credentials
+from .tts import TTS
+from .vc import VC
 
 
 class CharactrAPISDK:

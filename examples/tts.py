@@ -1,7 +1,6 @@
-import sys
-
-from sdk.sdk import CharactrAPISDK
 from credentials import CREDENTIALS
+from charactr_api.sdk.sdk import CharactrAPISDK
+
 
 if __name__ == "__main__":
     sdk = CharactrAPISDK(CREDENTIALS)
@@ -9,9 +8,8 @@ if __name__ == "__main__":
     tts_voices = sdk.tts.get_voices()
     result = sdk.tts.convert("Hello world", tts_voices[0]["id"])
 
-    f = open("result_tts.wav", "wb")
-    f.write(result["data"])
-    f.close()
+    with open("result_tts.wav", "wb") as out_f:
+        out_f.write(result["data"])
 
     print("result_tts.wav has been saved.")
     print("Type: ", result["type"])

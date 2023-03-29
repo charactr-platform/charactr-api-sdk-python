@@ -1,6 +1,7 @@
-from sdk import Credentials
+from charactr_api.sdk.data_objects import Credentials
+
 
 CREDENTIALS: Credentials = {
-    "client_key": "",
-    "api_key": "",
+    "client_key": "xxx",
+    "api_key": "xxx",
 }

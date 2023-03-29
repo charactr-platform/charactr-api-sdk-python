@@ -1,8 +1,9 @@
 import json
 import requests
-from config import API_URL
-from data_objects import Credentials, Voice, Audio, map_voice
-from typing import List
+from typing import Dict, List
+
+from .config import API_URL
+from .data_objects import Credentials, Voice, map_voice
 
 
 class VC:
@@ -23,7 +24,7 @@ class VC:
             raise Exception(e)
         return list(map(map_voice, voices))
 
-    def convert(self, voice_id: int, input_audio: bytes) -> Audio:
+    def convert(self, voice_id: int, input_audio: bytes) -> Dict:
         """Convert one voice to another with audio file input."""
         headers = {
             "X-Client-Key": self.credentials["client_key"],
