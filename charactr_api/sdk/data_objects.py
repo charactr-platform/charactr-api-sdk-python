@@ -3,7 +3,7 @@ from typing import TypedDict, List
 
 class Credentials(TypedDict):
     client_key: str
-    api_key: int
+    api_key: str
 
 
 class VoiceLabel(TypedDict):
