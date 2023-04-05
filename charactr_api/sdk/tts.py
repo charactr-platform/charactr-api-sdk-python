@@ -1,30 +1,18 @@
 import json
 import requests
-from typing import Dict, List
+from typing import List
 
 from .config import API_URL
-from .data_objects import Credentials, Voice, map_voice
+from .data_objects import Voice, Audio
+from .conversion_module import ConversionModule
 
 
-class TTS:
-    def __init__(self, credentials: Credentials) -> None:
-        self.credentials = credentials
-
+class TTS(ConversionModule):
     def get_voices(self) -> List[Voice]:
         """Get the list of available TTS voices."""
-        headers = {
-            "X-Client-Key": self.credentials["client_key"],
-            "X-Api-Key": self.credentials["api_key"],
-        }
-        response = requests.get(API_URL + "/v1/tts/voices", headers=headers)
+        return super().get_voices("tts")
 
-        try:
-            voices = json.loads(response.content)
-        except Exception as e:
-            raise Exception(e)
-        return list(map(map_voice, voices))
-
-    def convert(self, voice_id: int, text: str) -> Dict:
+    def convert(self, voice_id: int, text: str) -> Audio:
         """Convert text to speech with the voice of your choice."""
         headers = {
             "X-Client-Key": self.credentials["client_key"],
@@ -37,9 +25,9 @@ class TTS:
             API_URL + "/v1/tts/convert", headers=headers, data=json.dumps(data)
         )
 
-        return {
-            "data": response.content,
-            "type": response.headers["Content-Type"],
-            "duration_ms": response.headers["Audio-Duration-Ms"],
-            "size_bytes": response.headers["Audio-Size-Bytes"],
-        }
+        return Audio(
+            data=response.content,
+            type=response.headers["Content-Type"],
+            duration_ms=response.headers["Audio-Duration-Ms"],
+            size_bytes=response.headers["Audio-Size-Bytes"],
+        )

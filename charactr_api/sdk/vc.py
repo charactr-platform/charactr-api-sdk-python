@@ -1,40 +1,33 @@
-import json
 import requests
 from typing import Dict, List
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 from .config import API_URL
-from .data_objects import Credentials, Voice, map_voice
+from .data_objects import Voice
+from .conversion_module import ConversionModule
 
 
-class VC:
-    def __init__(self, credentials: Credentials) -> None:
-        self.credentials = credentials
-
+class VC(ConversionModule):
     def get_voices(self) -> List[Voice]:
         """Get the list of available VC voices."""
-        headers = {
-            "X-Client-Key": self.credentials["client_key"],
-            "X-Api-Key": self.credentials["api_key"],
-        }
-        response = requests.get(API_URL + "/v1/vc/voices", headers=headers)
-
-        try:
-            voices = json.loads(response.content)
-        except Exception as e:
-            raise Exception(e)
-        return list(map(map_voice, voices))
+        return super().get_voices("vc")
 
     def convert(self, voice_id: int, input_audio: bytes) -> Dict:
         """Convert one voice to another with audio file input."""
+        multipart_data = MultipartEncoder(
+            fields={"file": ("file.wav", input_audio, "audio/wav")}
+        )
+
         headers = {
             "X-Client-Key": self.credentials["client_key"],
             "X-API-Key": self.credentials["api_key"],
+            "Content-Type": multipart_data.content_type,
         }
 
         response = requests.post(
             API_URL + "/v1/vc/convert?voiceId=" + str(voice_id),
             headers=headers,
-            files=dict(file=input_audio),
+            data=multipart_data,
         )
 
         return {

@@ -24,10 +24,10 @@ pip install -e .
 ```
 
 ## Usage
-For the detailed SDK usage, please refer to the `./examples` directory.
+For the detailed SDK usage, please refer to the [SDK Reference](https://docs.api.charactr.com/reference/python) or the `./examples` directory.
 
 ## How to run examples
-To run examples, set your keys in `examples/credentials.py` and type in `charactr-api-sdk-python` directory:
+To run examples, install the package in editable mode (see: `Installation`), set your keys in `examples/credentials.py` and type in `charactr-api-sdk-python` directory:
 ```commandline
 python examples/tts.py
 ```

@@ -21,13 +21,13 @@ class Voice(TypedDict):
 
 def map_voice(api_voice) -> Voice:
     """Map API Voice response to internal Voice dict"""
-    return {
-        "id": api_voice["id"],
-        "name": api_voice["name"],
-        "description": api_voice["description"],
-        "labels": api_voice["labels"],
-        "preview_url": api_voice["previewUrl"],
-    }
+    return Voice(
+        id=api_voice["id"],
+        name=api_voice["name"],
+        description=api_voice["description"],
+        labels=api_voice["labels"],
+        preview_url=api_voice["previewUrl"],
+    )
 
 
 class Audio(TypedDict):
