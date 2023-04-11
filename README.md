@@ -26,6 +26,17 @@ pip install -e .
 ## Usage
 For the detailed SDK usage, please refer to the [SDK Reference](https://docs.api.charactr.com/reference/python) or the `./examples` directory.
 
+### Quickstart
+
+```python
+from charactr_api import CharactrAPISDK, Credentials
+
+sdk = CharactrAPISDK(Credentials(client_key="xxx", api_key="yyy"))
+
+tts_voices = sdk.tts.get_voices()
+tts_result = sdk.tts.convert(tts_voices[0]["id"], "Hello world")
+```
+
 ## How to run examples
 To run examples, install the package in editable mode (see: `Installation`), set your keys in `examples/credentials.py` and type in `charactr-api-sdk-python` directory:
 ```commandline
