@@ -1,17 +1,15 @@
 import json
 import requests
-from typing import List
 
 from .config import API_URL
-from .data_objects import Voice, Audio
+from .data_objects import Audio, Credentials
 from .conversion_module import ConversionModule
 from .errors import get_api_error
 
 
 class TTS(ConversionModule):
-    def get_voices(self) -> List[Voice]:
-        """Get the list of available TTS voices."""
-        return super().get_voices("tts")
+    def __init__(self, credentials: Credentials) -> None:
+        super().__init__(credentials, "tts")
 
     def convert(self, voice_id: int, text: str) -> Audio:
         """Convert text to speech with the voice of your choice."""
@@ -23,7 +21,7 @@ class TTS(ConversionModule):
         data = {"voiceId": voice_id, "text": text}
 
         response = requests.post(
-            API_URL + "/v1/tts/convert", headers=headers, data=json.dumps(data)
+            API_URL + "/v1/" + self.module_name + "/convert", headers=headers, data=json.dumps(data)
         )
 
         if response.status_code != 200:

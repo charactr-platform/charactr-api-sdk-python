@@ -1,17 +1,16 @@
 import requests
-from typing import Dict, List
+from typing import Dict
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 from .config import API_URL
-from .data_objects import Voice
+from .data_objects import Credentials
 from .conversion_module import ConversionModule
 from .errors import get_api_error
 
 
 class VC(ConversionModule):
-    def get_voices(self) -> List[Voice]:
-        """Get the list of available VC voices."""
-        return super().get_voices("vc")
+    def __init__(self, credentials: Credentials) -> None:
+        super().__init__(credentials, "vc")
 
     def convert(self, voice_id: int, input_audio: bytes) -> Dict:
         """Convert one voice to another with audio file input."""
@@ -26,7 +25,7 @@ class VC(ConversionModule):
         }
 
         response = requests.post(
-            API_URL + "/v1/vc/convert?voiceId=" + str(voice_id),
+            API_URL + "/v1/" + self.module_name + "/convert?voiceId=" + str(voice_id),
             headers=headers,
             data=multipart_data,
         )

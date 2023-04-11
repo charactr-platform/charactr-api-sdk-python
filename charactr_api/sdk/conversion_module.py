@@ -9,18 +9,19 @@ from .errors import get_api_error
 
 
 class ConversionModule:
-    def __init__(self, credentials: Credentials) -> None:
+    def __init__(self, credentials: Credentials, module_name: str) -> None:
         self.credentials = credentials
+        self.module_name = module_name
 
     @abstractmethod
-    def get_voices(self, module_name: str) -> List[Voice]:
+    def get_voices(self) -> List[Voice]:
         """Get the list of available voices."""
         headers = {
             "X-Client-Key": self.credentials["client_key"],
             "X-Api-Key": self.credentials["api_key"],
         }
         response = requests.get(
-            API_URL + "/v1/" + module_name + "/voices", headers=headers
+            API_URL + "/v1/" + self.module_name + "/voices", headers=headers
         )
 
         if response.status_code != 200:
