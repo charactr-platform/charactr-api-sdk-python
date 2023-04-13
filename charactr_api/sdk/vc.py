@@ -2,7 +2,7 @@ import requests
 from typing import Dict
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-from .config import API_URL
+from .config import API_URL, ApiVersion
 from .data_objects import Credentials
 from .conversion_module import ConversionModule
 from .errors import get_api_error
@@ -25,7 +25,7 @@ class VC(ConversionModule):
         }
 
         response = requests.post(
-            API_URL + "/v1/" + self.module_name + "/convert?voiceId=" + str(voice_id),
+            API_URL + "/" + ApiVersion.V1 + "/" + self.module_name + "/convert?voiceId=" + str(voice_id),
             headers=headers,
             data=multipart_data,
         )

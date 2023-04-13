@@ -1,7 +1,7 @@
 import json
 import requests
 
-from .config import API_URL
+from .config import API_URL, ApiVersion
 from .data_objects import Audio, Credentials
 from .conversion_module import ConversionModule
 from .errors import get_api_error
@@ -21,7 +21,7 @@ class TTS(ConversionModule):
         data = {"voiceId": voice_id, "text": text}
 
         response = requests.post(
-            API_URL + "/v1/" + self.module_name + "/convert", headers=headers, data=json.dumps(data)
+            API_URL + "/" + ApiVersion.V1 + "/" + self.module_name + "/convert", headers=headers, data=json.dumps(data)
         )
 
         if response.status_code != 200:

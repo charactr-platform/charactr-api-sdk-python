@@ -3,7 +3,7 @@ import requests
 from typing import List
 from abc import abstractmethod
 
-from .config import API_URL
+from .config import API_URL, ApiVersion
 from .data_objects import Credentials, Voice, map_voice
 from .errors import get_api_error
 
@@ -21,7 +21,7 @@ class ConversionModule:
             "X-Api-Key": self.credentials["api_key"],
         }
         response = requests.get(
-            API_URL + "/v1/" + self.module_name + "/voices", headers=headers
+            API_URL + "/" + ApiVersion.V1 + "/" + self.module_name + "/voices", headers=headers
         )
 
         if response.status_code != 200:
