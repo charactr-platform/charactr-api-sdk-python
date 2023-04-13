@@ -13,14 +13,8 @@ Python SDK to interact with the charactr API.
 - getting lists of available voices
 
 ## Installation
-To install the package, run in `charactr-api-sdk-python` directory:
-```commandline
-python setup.py sdist
-pip install charactr_api
-```
-To install the package in editable mode, run in `charactr-api-sdk-python` directory:
-```commandline
-pip install -e .
+```bash
+pip install charactr-api-sdk
 ```
 
 ## Usage
@@ -38,11 +32,23 @@ tts_result = sdk.tts.convert(tts_voices[0]["id"], "Hello world")
 ```
 
 ## How to run examples
-To run examples, install the package in editable mode (see: `Installation`), set your keys in `examples/credentials.py` and type in `charactr-api-sdk-python` directory:
-```commandline
-python examples/tts.py
+
+#### Clone & install the SDK locally
+```bash
+$ git clone https://github.com/charactr-platform/charactr-api-sdk-python
+$ cd charactr-api-sdk-python
+$ python setup.py sdist
 ```
-or
-```commandline
-python examples/vc.py
+
+#### Provide credentials
+Open `./examples/credentials.py` and provide your credentials. You can find them in your [Client Panel](https://api.charactr.com) account.
+
+#### Use TTS
+```bash
+$ python examples/tts.py
+```
+
+#### Use VC
+```bash
+$ python examples/vc.py
 ```
