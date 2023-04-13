@@ -5,4 +5,4 @@ API_URL = "https://api.charactr.com"
 
 
 class ApiVersion(Enum):
-    V1 = 'v1'
+    V1 = "v1"

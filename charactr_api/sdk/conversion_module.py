@@ -21,7 +21,8 @@ class ConversionModule:
             "X-Api-Key": self.credentials["api_key"],
         }
         response = requests.get(
-            API_URL + "/" + ApiVersion.V1.value + "/" + self.module_name + "/voices", headers=headers
+            API_URL + "/" + ApiVersion.V1.value + "/" + self.module_name + "/voices",
+            headers=headers,
         )
 
         if response.status_code != 200:
