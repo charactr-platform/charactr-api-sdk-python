@@ -21,7 +21,7 @@ class TTS(ConversionModule):
         data = {"voiceId": voice_id, "text": text}
 
         response = requests.post(
-            API_URL + "/" + ApiVersion.V1 + "/" + self.module_name + "/convert", headers=headers, data=json.dumps(data)
+            API_URL + "/" + ApiVersion.V1.value + "/" + self.module_name + "/convert", headers=headers, data=json.dumps(data)
         )
 
         if response.status_code != 200:

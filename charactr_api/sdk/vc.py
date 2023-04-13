@@ -25,7 +25,7 @@ class VC(ConversionModule):
         }
 
         response = requests.post(
-            API_URL + "/" + ApiVersion.V1 + "/" + self.module_name + "/convert?voiceId=" + str(voice_id),
+            API_URL + "/" + ApiVersion.V1.value + "/" + self.module_name + "/convert?voiceId=" + str(voice_id),
             headers=headers,
             data=multipart_data,
         )
