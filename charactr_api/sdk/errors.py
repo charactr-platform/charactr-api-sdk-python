@@ -1,6 +1,11 @@
 import json
 
 
+class ConnectionClosedError(Exception):
+    def __init__(self):
+        super().__init__("Connection is already closed.")
+
+
 class ClientError(Exception):
     """Exception raised for 4xx http errors"""
 
