@@ -1,11 +1,11 @@
 import json
 import requests
+from typing import Callable
 
 from .config import API_URL, ApiVersion
 from .data_objects import Audio, Credentials
 from .conversion_module import ConversionModule
 from .errors import get_api_error
-from typing import Callable
 from .tts_stream_simplex import TTSStreamSimplex
 from .tts_stream_duplex import TTSStreamDuplex
 

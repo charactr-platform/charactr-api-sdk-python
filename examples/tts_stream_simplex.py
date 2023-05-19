@@ -17,7 +17,7 @@ if __name__ == "__main__":
                 print("result_tts_stream_simplex.wav has been saved.")
 
         tts_voices = sdk.tts.get_voices()
-        text = "Hello world from the charactr TTS Duplex Streaming."
+        text = "Hello world from the charactr TTS Simplex Streaming."
 
         stream = sdk.tts.start_simplex_stream(
             tts_voices[0]["id"], text, on_data=on_data, on_close=on_close
