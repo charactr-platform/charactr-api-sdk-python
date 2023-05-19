@@ -35,3 +35,9 @@ class Audio(TypedDict):
     type: str
     duration_ms: int
     size_bytes: int
+
+
+class TTSMsgType:
+    AUTH = "authApiKey"
+    CONVERT = "convert"
+    CLOSE = "close"

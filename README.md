@@ -48,6 +48,16 @@ Open `./examples/credentials.py` and provide your credentials. You can find them
 $ python examples/tts.py
 ```
 
+#### Use TTS Simplex Streaming
+```bash
+$ python examples/tts_stream_simplex.py
+```
+
+#### Use TTS Duplex Streaming
+```bash
+$ python examples/tts_stream_duplex.py
+```
+
 #### Use VC
 ```bash
 $ python examples/vc.py
