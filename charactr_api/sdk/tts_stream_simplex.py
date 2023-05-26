@@ -27,6 +27,9 @@ class TTSStreamSimplex:
 
         self.ws = websocket.WebSocketApp(
             WS_API_URL + "/v1/tts/stream/simplex/ws?voiceId=" + str(self.voice_id),
+            header={
+              "User-Agent": "charactr-api-sdk-python",
+            },
             on_open=self.__on_open,
             on_message=self.__on_message,
             on_close=self.__on_close,

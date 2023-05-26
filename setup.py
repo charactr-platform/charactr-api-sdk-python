@@ -9,7 +9,7 @@ setup(
     description="Python SDK to interact with the charactr API.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    version="1.1.2",
+    version="1.1.3",
     author="charactr",
     author_email="support@charactr.com",
     url="https://github.com/charactr-platform/charactr-api-sdk-python",
