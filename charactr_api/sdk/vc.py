@@ -22,6 +22,7 @@ class VC(ConversionModule):
             "X-Client-Key": self.credentials["client_key"],
             "X-API-Key": self.credentials["api_key"],
             "Content-Type": multipart_data.content_type,
+            "User-Agent": "sdk-python",
         }
 
         response = requests.post(

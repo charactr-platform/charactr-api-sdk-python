@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.2.0] - 2023-07-26
+
+- Changed User-Agent header to custom value to differentiate SDKs in the backend
+- Exposed custom audio format and sample rate settings for TTS Streaming
+
 ## [1.1.4] - 2023-05-26
 
 - Added User-Agent header to the WebSocket handshake request

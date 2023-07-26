@@ -1,4 +1,4 @@
-from .data_objects import Credentials
+from .data_objects import Credentials, TTSStreamingOptions
 from .tts import TTS
 from .vc import VC
 

@@ -41,3 +41,8 @@ class TTSMsgType:
     AUTH = "authApiKey"
     CONVERT = "convert"
     CLOSE = "close"
+
+
+class TTSStreamingOptions(TypedDict):
+    format: str
+    sample_rate: int
