@@ -18,7 +18,7 @@ pip install charactr-api-sdk
 ```
 
 ## Usage
-For the detailed SDK usage, please refer to the [SDK Reference](https://docs.api.charactr.com/reference/python) or the `./examples` directory.
+For the detailed SDK usage, please refer to the [SDK Reference](https://docs.api.gemelo.ai/reference/python) or the `./examples` directory.
 
 ### Quickstart
 
@@ -41,7 +41,7 @@ $ python setup.py sdist
 ```
 
 #### Provide credentials
-Open `./examples/credentials.py` and provide your credentials. You can find them in your [Client Panel](https://api.charactr.com) account.
+Open `./examples/credentials.py` and provide your credentials. You can find them in your [Client Panel](https://app.gemelo.ai) account.
 
 #### Use TTS
 ```bash
