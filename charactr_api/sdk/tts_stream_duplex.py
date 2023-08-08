@@ -2,9 +2,10 @@ import json
 import websocket
 import threading
 
-from .data_objects import Credentials, TTSMsgType
+from .data_objects import Credentials, TTSMsgType, TTSStreamingOptions
 from .errors import ConnectionClosedError
 from .config import WS_API_URL
+from .streaming_utils import get_tts_streaming_query_params
 from datetime import datetime
 from typing import Callable
 
@@ -19,6 +20,7 @@ class TTSStreamDuplex:
         voice_id: int,
         on_data: Callable[[bytes], None] = None,
         on_close: Callable[[int, str], None] = None,
+        options: TTSStreamingOptions = None,
     ) -> None:
         self.credentials = credentials
         self.voice_id = voice_id
@@ -29,10 +31,12 @@ class TTSStreamDuplex:
         self.on_close = on_close
         self.__on_close_event = threading.Event()
 
+        params = get_tts_streaming_query_params(voice_id, options)
+
         self.ws = websocket.WebSocketApp(
-            WS_API_URL + "/v1/tts/stream/duplex/ws?voiceId=" + str(self.voice_id),
+            WS_API_URL + "/v1/tts/stream/duplex/ws?" + params,
             header={
-                "User-Agent": "charactr-api-sdk-python",
+                "User-Agent": "sdk-python",
             },
             on_open=self.__on_open,
             on_message=self.__on_message,
