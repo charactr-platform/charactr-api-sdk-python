@@ -3,7 +3,7 @@ import requests
 from typing import Callable
 
 from .config import API_URL, ApiVersion
-from .data_objects import Audio, Credentials
+from .data_objects import Audio, Credentials, TTSStreamingOptions
 from .conversion_module import ConversionModule
 from .errors import get_api_error
 from .tts_stream_simplex import TTSStreamSimplex
@@ -20,6 +20,7 @@ class TTS(ConversionModule):
             "X-Client-Key": self.credentials["client_key"],
             "X-API-Key": self.credentials["api_key"],
             "Content-Type": "application/json",
+            "User-Agent": "sdk-python",
         }
         data = {"voiceId": voice_id, "text": text}
 
@@ -46,6 +47,7 @@ class TTS(ConversionModule):
         blocking: bool = True,
         on_data: Callable[[bytes], None] = None,
         on_close: Callable[[int, str], None] = None,
+        options: TTSStreamingOptions = None,
     ) -> TTSStreamSimplex:
         """Simplex streaming allows to send the text to the
         server once and receive the audio response as a stream."""
@@ -56,6 +58,7 @@ class TTS(ConversionModule):
             blocking=blocking,
             on_data=on_data,
             on_close=on_close,
+            options=options,
         )
 
     def start_duplex_stream(
@@ -63,9 +66,14 @@ class TTS(ConversionModule):
         voice_id: int,
         on_data: Callable[[bytes], None] = None,
         on_close: Callable[[int, str], None] = None,
+        options: TTSStreamingOptions = None,
     ) -> TTSStreamDuplex:
         """Duplex streaming allows to send the text to the server multiple times
         and asynchronously receive the audio response as a stream."""
         return TTSStreamDuplex(
-            self.credentials, voice_id, on_data=on_data, on_close=on_close
+            self.credentials,
+            voice_id,
+            on_data=on_data,
+            on_close=on_close,
+            options=options,
         )
