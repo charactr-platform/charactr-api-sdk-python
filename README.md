@@ -35,9 +35,9 @@ tts_result = sdk.tts.convert(tts_voices[0]["id"], "Hello world")
 
 #### Clone & install the SDK locally
 ```bash
-$ git clone https://github.com/charactr-platform/charactr-api-sdk-python
-$ cd charactr-api-sdk-python
-$ python setup.py sdist
+git clone https://github.com/charactr-platform/charactr-api-sdk-python
+cd charactr-api-sdk-python
+python setup.py sdist
 ```
 
 #### Provide credentials
@@ -45,20 +45,25 @@ Open `./examples/credentials.py` and provide your credentials. You can find them
 
 #### Use TTS
 ```bash
-$ python examples/tts.py
+python examples/tts.py
 ```
 
 #### Use TTS Simplex Streaming
 ```bash
-$ python examples/tts_stream_simplex.py
+python examples/tts_stream_simplex.py
 ```
 
 #### Use TTS Duplex Streaming
 ```bash
-$ python examples/tts_stream_duplex.py
+python examples/tts_stream_duplex.py
 ```
 
 #### Use VC
 ```bash
-$ python examples/vc.py
+python examples/vc.py
+```
+
+#### Use Voice Clones
+```bash
+python examples/clones.py
 ```

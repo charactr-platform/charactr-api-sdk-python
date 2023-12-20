@@ -23,10 +23,10 @@ def map_voice(api_voice) -> Voice:
     """Map API Voice response to internal Voice dict"""
     return Voice(
         id=api_voice["id"],
-        name=api_voice["name"],
-        description=api_voice["description"],
-        labels=api_voice["labels"],
-        preview_url=api_voice["previewUrl"],
+        name=api_voice["name"] if "name" in api_voice else "",
+        description=api_voice["description"] if "description" in api_voice else "",
+        labels=api_voice["labels"] if "labels" in api_voice else [],
+        preview_url=api_voice["previewUrl"] if "previewUrl" in api_voice else "",
     )
 
 
@@ -46,3 +46,10 @@ class TTSMsgType:
 class TTSStreamingOptions(TypedDict):
     format: str
     sample_rate: int
+    cloned_voice: bool
+
+class TTSOptions(TypedDict):
+    cloned_voice: bool
+
+class VCOptions(TypedDict):
+    cloned_voice: bool

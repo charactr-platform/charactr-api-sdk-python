@@ -3,7 +3,7 @@ import requests
 from typing import Callable
 
 from .config import API_URL, ApiVersion
-from .data_objects import Audio, Credentials, TTSStreamingOptions
+from .data_objects import Audio, Credentials, TTSStreamingOptions, TTSOptions
 from .conversion_module import ConversionModule
 from .errors import get_api_error
 from .tts_stream_simplex import TTSStreamSimplex
@@ -14,7 +14,7 @@ class TTS(ConversionModule):
     def __init__(self, credentials: Credentials) -> None:
         super().__init__(credentials, "tts")
 
-    def convert(self, voice_id: int, text: str) -> Audio:
+    def convert(self, voice_id: int, text: str, options: TTSOptions = None) -> Audio:
         """Convert text to speech with the voice of your choice."""
         headers = {
             "X-Client-Key": self.credentials["client_key"],
@@ -22,7 +22,12 @@ class TTS(ConversionModule):
             "Content-Type": "application/json",
             "User-Agent": "sdk-python",
         }
-        data = {"voiceId": voice_id, "text": text}
+        
+        voiceType = "system"
+        if options is not None and options["cloned_voice"]:
+            voiceType = "cloned"
+
+        data = {"voiceId": voice_id, "text": text, "voiceType": voiceType}
 
         response = requests.post(
             API_URL + "/" + ApiVersion.V1.value + "/" + self.module_name + "/convert",
