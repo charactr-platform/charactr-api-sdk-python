@@ -3,8 +3,7 @@ name: Publish Py SDK
 on:
   push:
     branches:
-      -  publish
-  workflow_dispatch:
+      -  main
 
 jobs:
   publish:
