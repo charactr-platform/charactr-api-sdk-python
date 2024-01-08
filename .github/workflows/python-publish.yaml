@@ -1,0 +1,26 @@
+name: Publish Py SDK
+
+on:
+  push:
+    branches:
+      -  publish
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build and upload
+        run: |
+          pip install --upgrade build twine
+          python setup.py sdist
+          twine upload dist/*
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}

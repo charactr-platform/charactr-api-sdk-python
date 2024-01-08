@@ -9,7 +9,7 @@ setup(
     description="Python SDK to interact with the charactr API.",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    version="2.0.0",
+    version="2.0.1",
     author="charactr",
     author_email="support@gemelo.ai",
     url="https://github.com/charactr-platform/charactr-api-sdk-python",
