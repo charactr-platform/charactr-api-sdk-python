@@ -37,7 +37,7 @@ tts_result = sdk.tts.convert(tts_voices[0]["id"], "Hello world")
 ```bash
 git clone https://github.com/charactr-platform/charactr-api-sdk-python
 cd charactr-api-sdk-python
-python setup.py sdist
+pip install .
 ```
 
 #### Provide credentials
