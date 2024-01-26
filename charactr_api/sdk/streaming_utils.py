@@ -18,4 +18,7 @@ def get_tts_streaming_query_params(
         if "sample_rate" in options:
             params["sr"] = str(options["sample_rate"])
 
+        if "cloned_voice" in options:
+            params["voiceType"] = "cloned"
+
     return urlencode(params)

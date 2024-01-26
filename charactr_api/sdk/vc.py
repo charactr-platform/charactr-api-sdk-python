@@ -3,7 +3,7 @@ from typing import Dict
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 from .config import API_URL, ApiVersion
-from .data_objects import Credentials
+from .data_objects import Credentials, VCOptions
 from .conversion_module import ConversionModule
 from .errors import get_api_error
 
@@ -12,7 +12,7 @@ class VC(ConversionModule):
     def __init__(self, credentials: Credentials) -> None:
         super().__init__(credentials, "vc")
 
-    def convert(self, voice_id: int, input_audio: bytes) -> Dict:
+    def convert(self, voice_id: int, input_audio: bytes, options: VCOptions = None) -> Dict:
         """Convert one voice to another with audio file input."""
         multipart_data = MultipartEncoder(
             fields={"file": ("file.wav", input_audio, "audio/wav")}
@@ -25,6 +25,10 @@ class VC(ConversionModule):
             "User-Agent": "sdk-python",
         }
 
+        voiceType = "system"
+        if options is not None and options["cloned_voice"]:
+            voiceType = "cloned"
+
         response = requests.post(
             API_URL
             + "/"
@@ -32,7 +36,9 @@ class VC(ConversionModule):
             + "/"
             + self.module_name
             + "/convert?voiceId="
-            + str(voice_id),
+            + str(voice_id)
+            + "&voiceType="
+            + str(voiceType),
             headers=headers,
             data=multipart_data,
         )
